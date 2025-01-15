@@ -1,0 +1,78 @@
+import axios from "axios";
+import { API_URL } from "../../utils/apiURL"
+import { getLocalStorageUserdetails } from "../../utils/getLocalStorageUserdetails";
+
+//! Get the token
+const token = getLocalStorageUserdetails();
+console.log("In project queries")
+console.log(token)
+//! Add
+export const addProject = async ({ name, budgetAllocated, startDate, endDate }) => {
+  const response = await axios.post(
+    `${API_URL}/projects/create`,
+    {
+      name,
+      budgetAllocated,
+      startDate,
+      endDate
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //Return a promise
+  return response.data;
+};
+//! update
+export const updateProject= async ({ name, budgetAllocated, startDate, endDate, id }) => {
+  const response = await axios.put(
+    `${API_URL}/projects/update/${id}`,
+    {
+      name,
+      budgetAllocated,
+      startDate,
+      endDate
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //Return a promise
+  return response.data;
+};
+//! delete
+export const deleteProject = async (id) => {
+  const response = await axios.delete(`${API_URL}/projects/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  //Return a promise
+  return response.data;
+};
+//! lists
+export const listProjects = async () => {
+  const response = await axios.get(`${API_URL}/projects/listProjects`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  //Return a promise
+  return response.data;
+};
+
+
+//! delete
+export const listSpecProject = async (id) => {
+  const response = await axios.get(`${API_URL}/projects/listProjects/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  //Return a promise
+  return response.data;
+};
