@@ -22,5 +22,4 @@ INSTRUCTIONS FOR CLIENT:
 2. Run **"npm install"** to install all the dependencies.
 3. Run **"npm run dev"** to start the react app.
 
-## Deployment
 
